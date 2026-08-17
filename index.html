@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>ثبت‌نام آموزشگاه</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<style>
+  :root{
+    --bg:#F6F7F9;
+    --card:#FFFFFF;
+    --border:#E7E9EE;
+    --text:#1F2430;
+    --muted:#8A8F9C;
+    --primary:#4F5DFF;
+    --primary-dark:#3A46D9;
+    --radius:20px;
+    --shadow:0 4px 20px rgba(31,36,48,0.06);
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    font-family:'Vazirmatn',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    display:flex;
+    justify-content:center;
+    padding:20px 12px calc(20px + env(safe-area-inset-bottom));
+  }
+  .wrap{width:100%;max-width:560px;}
+  .progress{display:flex;gap:8px;margin-bottom:18px;}
+  .progress div{flex:1;height:4px;border-radius:4px;background:var(--border);transition:.3s;}
+  .progress div.active{background:var(--primary);}
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:20px 18px;
+    margin-bottom:16px;
+  }
+  h1{font-size:19px;margin:0 0 4px;}
+  p.sub{color:var(--muted);font-size:13.5px;margin:0 0 20px;}
+
+  label{display:block;font-size:14px;margin:16px 0 6px;color:var(--text);}
+  input[type=text],input[type=tel]{
+    width:100%;
+    padding:14px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    font-family:inherit;
+    font-size:16px;
+    background:#FAFBFC;
+    outline:none;
+    transition:.2s;
+  }
+  input:focus{border-color:var(--primary);background:#fff;}
+
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    padding:14px 22px;
+    border-radius:14px;
+    border:none;
+    font-family:inherit;
+    font-size:15px;
+    cursor:pointer;
+    transition:.2s;
+    min-height:48px;
+    touch-action:manipulation;
+  }
+  .btn-primary{background:var(--primary);color:#fff;flex:1;}
+  .btn-primary:disabled{opacity:.6;}
+  .btn-ghost{background:transparent;color:var(--muted);}
+  .btn-ghost:hover{color:var(--text);}
+  .row-btns{display:flex;justify-content:space-between;gap:10px;margin-top:20px;}
+
+  .class-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  @media(max-width:420px){.class-grid{grid-template-columns:1fr 1fr;gap:10px;}}
+
+  .class-card{
+    border:2px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:.15s;
+    background:#fff;
+    touch-action:manipulation;
+  }
+  .class-card:active{transform:scale(0.98);}
+  .class-card.selected{border-color:var(--primary);box-shadow:0 0 0 3px rgba(79,93,255,0.12);}
+  .class-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;}
+  .class-body{padding:10px 12px;text-align:center;}
+  .class-name{font-size:14px;font-weight:600;margin:0 0 3px;line-height:1.4;}
+  .class-meta{font-size:11.5px;color:var(--muted);margin:0 0 4px;}
+  .class-price{font-size:12px;font-weight:600;color:var(--primary-dark);margin:0;}
+
+  .summary-item{
+    display:flex;
+    justify-content:space-between;
+    padding:10px 0;
+    border-bottom:1px solid var(--border);
+    font-size:14px;
+  }
+  .summary-item:last-child{border-bottom:none;}
+  .summary-classes{margin-top:14px;}
+  .summary-classes label{margin:0 0 10px;}
+
+  .summary-class-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  @media(max-width:420px){.summary-class-grid{grid-template-columns:1fr 1fr;gap:8px;}}
+  .summary-class-card{
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+    background:#fff;
+  }
+  .summary-class-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;}
+  .summary-class-card .name{
+    padding:8px 10px 2px;
+    font-size:13px;
+    font-weight:600;
+    text-align:center;
+  }
+  .summary-class-card .price{
+    padding:0 10px 8px;
+    font-size:11.5px;
+    color:var(--muted);
+    text-align:center;
+  }
+
+  .total-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:16px;
+    padding:14px 16px;
+    background:#F3F4FF;
+    border:1px solid #DBDFFF;
+    border-radius:14px;
+  }
+  .total-row span{font-size:14px;color:var(--text);}
+  .total-row strong{font-size:16px;color:var(--primary-dark);}
+
+  .success-box{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px 12px;
+    width:100%;
+  }
+  .success-icon{font-size:48px;line-height:1;margin-bottom:14px;direction:ltr;}
+  .success-box h1{width:100%;margin:0 0 8px;font-size:20px;}
+  .success-box p.sub{width:100%;margin:0;}
+
+  .empty-note{
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    margin-top:6px;
+    grid-column:1/-1;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="progress">
+    <div id="p1" class="active"></div>
+    <div id="p2"></div>
+    <div id="p3"></div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="card" id="step1">
+    <h1>اطلاعات فردی</h1>
+    <p class="sub">برای شروع ثبت‌نام، اطلاعاتت رو وارد کن</p>
+
+    <label>نام و نام خانوادگی</label>
+    <input type="text" id="fullname" placeholder="نام و نام خانوادگی را وارد کن">
+
+    <label>شماره تماس</label>
+    <input type="tel" id="phone" placeholder="مثلاً 09123456789" inputmode="numeric" maxlength="11">
+    <p id="phoneError" style="color:#E5484D;font-size:12.5px;margin:6px 0 0;display:none;">شماره باید دقیقاً ۱۱ رقم باشه</p>
+
+    <div class="row-btns">
+      <button class="btn btn-primary" onclick="goStep(2)">مرحله بعد</button>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="card" id="step2" style="display:none;">
+    <h1>انتخاب کلاس‌ها</h1>
+    <p class="sub">می‌تونی چند کلاس رو هم‌زمان انتخاب کنی</p>
+
+    <div class="class-grid" id="classGrid"></div>
+
+    <div class="row-btns">
+      <button class="btn btn-ghost" onclick="goStep(1)">قبلی</button>
+      <button class="btn btn-primary" onclick="goStep(3)">مرحله بعد</button>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="card" id="step3" style="display:none;">
+    <h1>خلاصه ثبت‌نام</h1>
+    <p class="sub">اگه اطلاعات درسته، ثبت‌نام رو نهایی کن</p>
+
+    <div class="summary-item"><span>نام و نام خانوادگی</span><strong id="sumName"></strong></div>
+    <div class="summary-item"><span>شماره تماس</span><strong id="sumPhone"></strong></div>
+
+    <div class="summary-classes">
+      <label>کلاس‌های انتخابی</label>
+      <div class="summary-class-grid" id="sumClasses"></div>
+    </div>
+
+    <div class="total-row">
+      <span>مجموع هزینه کلاس‌ها:</span>
+      <strong id="sumTotal"></strong>
+    </div>
+
+    <div class="row-btns">
+      <button class="btn btn-ghost" onclick="goStep(2)">قبلی</button>
+      <button class="btn btn-primary" onclick="submitForm()">ثبت‌نام نهایی</button>
+    </div>
+  </div>
+
+  <!-- STEP 4: SUCCESS -->
+  <div class="card" id="step4" style="display:none;">
+    <div class="success-box">
+      <div class="success-icon">✅</div>
+      <h1>با موفقیت ثبت شد</h1>
+      <p class="sub">ثبت‌نامت با موفقیت انجام شد، به‌زودی باهات تماس می‌گیریم.</p>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const classes = [
+  { id: 'c1', name: 'خطاطی', meta: 'استاد محمدرضا صفالو', price: 480000, img: 'images/khatati.jpg' },
+  { id: 'c2', name: 'عکاسی', meta: 'استاد محمدعارف رضاصفت', price: 550000, img: 'images/akasi.jpg' },
+  { id: 'c3', name: 'تدوین', meta: 'استاد محمدحسین حسین‌مردی', price: 1200000, img: 'images/tadvin.jpg' },
+  { id: 'c4', name: 'کورل', meta: 'استاد متین رضایت', price: 680000, img: 'images/corel.jpg' },
+  { id: 'c5', name: 'شاعری', meta: 'استاد حسین معصومی', price: 350000, img: 'images/shaeri.jpg' }
+];
+
+const selected = new Set();
+
+function formatPrice(num){
+  return num.toLocaleString('fa-IR') + ' تومان';
+}
+
+function renderClasses(){
+  const grid = document.getElementById('classGrid');
+  grid.innerHTML = classes.map(c => `
+    <div class="class-card" id="card-${c.id}" onclick="toggleClass('${c.id}')">
+      <img src="${c.img}" alt="${c.name}" loading="lazy">
+      <div class="class-body">
+        <p class="class-name">${c.name}</p>
+        <p class="class-meta">${c.meta}</p>
+        <p class="class-price">${formatPrice(c.price)}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleClass(id){
+  const card = document.getElementById('card-'+id);
+  if(selected.has(id)){
+    selected.delete(id);
+    card.classList.remove('selected');
+  } else {
+    selected.add(id);
+    card.classList.add('selected');
+  }
+}
+
+document.getElementById('phone').addEventListener('input', function(){
+  this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);
+});
+
+function goStep(n){
+  if(n === 2){
+    const name = document.getElementById('fullname').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const phoneErr = document.getElementById('phoneError');
+
+    if(!name){
+      alert('لطفاً نام و نام خانوادگی رو وارد کن');
+      return;
+    }
+    if(!/^\d{11}$/.test(phone)){
+      phoneErr.style.display = 'block';
+      document.getElementById('phone').style.borderColor = '#E5484D';
+      return;
+    }
+    phoneErr.style.display = 'none';
+    document.getElementById('phone').style.borderColor = '';
+  }
+  if(n === 3 && selected.size === 0){
+    alert('حداقل یک کلاس رو انتخاب کن');
+    return;
+  }
+  ['1','2','3'].forEach(i=>{
+    document.getElementById('step'+i).style.display = (i===String(n)) ? 'block' : 'none';
+    document.getElementById('p'+i).classList.toggle('active', Number(i) <= n);
+  });
+  if(n === 3) fillSummary();
+  window.scrollTo(0,0);
+}
+
+function fillSummary(){
+  document.getElementById('sumName').textContent = document.getElementById('fullname').value;
+  document.getElementById('sumPhone').textContent = document.getElementById('phone').value;
+
+  let total = 0;
+  const cards = [...selected].map(id => {
+    const c = classes.find(x=>x.id===id);
+    total += c.price;
+    return `
+      <div class="summary-class-card">
+        <img src="${c.img}" alt="${c.name}" loading="lazy">
+        <div class="name">${c.name}</div>
+        <div class="price">${formatPrice(c.price)}</div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('sumClasses').innerHTML = cards || '<span class="empty-note">کلاسی انتخاب نشده</span>';
+  document.getElementById('sumTotal').textContent = formatPrice(total);
+}
+
+function submitForm(){
+  const data = {
+    name: document.getElementById('fullname').value,
+    phone: document.getElementById('phone').value,
+    classes: [...selected].map(id => classes.find(c=>c.id===id).name)
+  };
+
+  const btn = document.querySelector('#step3 .btn-primary');
+  btn.disabled = true;
+  btn.textContent = 'در حال ثبت...';
+
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(result => {
+    btn.disabled = false;
+    btn.textContent = 'ثبت‌نام نهایی';
+
+    if(result.status === 'duplicate'){
+      alert('این شماره قبلاً ثبت‌نام کرده');
+      return;
+    }
+
+    ['1','2','3'].forEach(i=>{
+      document.getElementById('step'+i).style.display = 'none';
+    });
+    document.getElementById('step4').style.display = 'block';
+    document.querySelector('.progress').style.display = 'none';
+    window.scrollTo(0,0);
+  })
+  .catch(err => {
+    btn.disabled = false;
+    btn.textContent = 'ثبت‌نام نهایی';
+    alert('مشکلی توی ارسال پیش اومد، دوباره امتحان کن');
+    console.error(err);
+  });
+}
+
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzeQmEWVF1vpoafF2alJkAAIGwKdvFkRAfUrAqX0OuJ10bxQndhGzjaaxt2N-C2FU3r/exec';
+
+renderClasses();
+</script>
+</body>
+</html>
