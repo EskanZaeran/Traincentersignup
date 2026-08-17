@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
 <title>ثبت‌نام آموزشگاه</title>
 
-<link rel="stylesheet"
-href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
 
 <style>
 :root{
@@ -20,1437 +18,301 @@ href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-f
   --primary-dark:#3A46D9;
   --danger:#E5484D;
   --radius:20px;
-  --shadow:0 4px 20px rgba(31,36,48,.06);
 }
-
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-}
-
-html{
-  -webkit-text-size-adjust:100%;
-}
-
+*{box-sizing:border-box}
 body{
   margin:0;
-  font-family:'Vazirmatn',sans-serif;
+  font-family:Vazirmatn,sans-serif;
   background:var(--bg);
   color:var(--text);
   display:flex;
   justify-content:center;
-  padding:20px 12px calc(20px + env(safe-area-inset-bottom));
+  padding:20px 12px;
 }
-
-.wrap{
-  width:100%;
-  max-width:560px;
-}
-
-.progress{
-  display:flex;
-  gap:8px;
-  margin-bottom:18px;
-}
-
-.progress div{
-  flex:1;
-  height:4px;
-  border-radius:4px;
-  background:var(--border);
-  transition:.3s;
-}
-
-.progress div.active{
-  background:var(--primary);
-}
-
+.wrap{width:100%;max-width:560px}
+.progress{display:flex;gap:8px;margin-bottom:18px}
+.progress div{flex:1;height:4px;border-radius:4px;background:#ddd}
+.progress .active{background:var(--primary)}
 .card{
-  background:var(--card);
+  background:#fff;
   border:1px solid var(--border);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
+  border-radius:20px;
   padding:20px 18px;
   margin-bottom:16px;
 }
-
-h1{
-  font-size:19px;
-  margin:0 0 4px;
-}
-
-p.sub{
-  color:var(--muted);
-  font-size:13.5px;
-  margin:0 0 20px;
-}
-
-label{
-  display:block;
-  font-size:14px;
-  margin:16px 0 6px;
-  color:var(--text);
-}
-
-input[type=text],
-input[type=tel]{
+label{display:block;margin:16px 0 6px}
+input{
   width:100%;
   padding:14px;
   border:1px solid var(--border);
   border-radius:14px;
   font-family:inherit;
-  font-size:16px;
-  background:#FAFBFC;
-  outline:none;
-  transition:.2s;
 }
-
-input:focus{
-  border-color:var(--primary);
-  background:#fff;
-}
-
-.error{
-  color:var(--danger);
-  font-size:12.5px;
-  margin:6px 0 0;
-  display:none;
-}
-
+.error{color:var(--danger);font-size:12px;display:none}
 .btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
   padding:14px 22px;
-  border-radius:14px;
   border:none;
+  border-radius:14px;
   font-family:inherit;
-  font-size:15px;
   cursor:pointer;
-  transition:.2s;
-  min-height:48px;
-  touch-action:manipulation;
 }
-
-.btn-primary{
-  background:var(--primary);
-  color:#fff;
-  flex:1;
-}
-
-.btn-primary:disabled{
-  opacity:.6;
-  cursor:not-allowed;
-}
-
-.btn-ghost{
-  background:transparent;
-  color:var(--muted);
-}
-
-.row-btns{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  margin-top:20px;
-}
-
-.class-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
+.btn-primary{background:var(--primary);color:#fff;flex:1}
+.btn-ghost{background:none}
+.row-btns{display:flex;gap:10px;margin-top:20px}
+.class-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .class-card{
   border:2px solid var(--border);
   border-radius:16px;
   overflow:hidden;
   cursor:pointer;
-  transition:.15s;
-  background:#fff;
-  touch-action:manipulation;
 }
-
-.class-card:active{
-  transform:scale(.98);
-}
-
-.class-card.selected{
-  border-color:var(--primary);
-  box-shadow:0 0 0 3px rgba(79,93,255,.12);
-}
-
-.class-card img{
-  width:100%;
-  aspect-ratio:1/1;
-  object-fit:cover;
-  display:block;
-}
-
-.class-body{
-  padding:10px 12px;
-  text-align:center;
-}
-
-.class-name{
-  font-size:14px;
-  font-weight:600;
-  margin:0 0 3px;
-  line-height:1.4;
-}
-
-.class-meta{
-  font-size:11.5px;
-  color:var(--muted);
-  margin:0 0 5px;
-}
-
-.class-price{
-  font-size:12px;
-  font-weight:600;
-  color:var(--primary-dark);
-  margin:0;
-}
-
-.old-price{
-  color:#999;
-  text-decoration:line-through;
-  font-size:11px;
-}
-
-.new-price{
-  color:var(--primary-dark);
-  font-size:13px;
-  font-weight:700;
-}
-
+.class-card.selected{border-color:var(--primary)}
+.class-card img{width:100%;aspect-ratio:1/1;object-fit:cover}
+.class-body{text-align:center;padding:10px}
+.old-price{text-decoration:line-through;color:#999;font-size:11px}
+.new-price{font-weight:bold;color:var(--primary-dark)}
 .summary-item{
   display:flex;
   justify-content:space-between;
-  gap:15px;
   padding:10px 0;
   border-bottom:1px solid var(--border);
-  font-size:14px;
 }
-
-.summary-item strong{
-  text-align:left;
-}
-
-.summary-classes{
-  margin-top:14px;
-}
-
-.summary-classes label{
-  margin:0 0 10px;
-}
-
-.summary-class-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.summary-class-card{
-  border:1px solid var(--border);
-  border-radius:14px;
-  overflow:hidden;
-  background:#fff;
-}
-
-.summary-class-card img{
-  width:100%;
-  aspect-ratio:1/1;
-  object-fit:cover;
-  display:block;
-}
-
-.summary-class-card .name{
-  padding:8px 10px 2px;
-  font-size:13px;
-  font-weight:600;
-  text-align:center;
-}
-
-.summary-class-card .price{
-  padding:0 10px 8px;
-  font-size:11.5px;
-  color:var(--muted);
-  text-align:center;
-}
-
 .total-row{
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  margin-top:16px;
-  padding:14px 16px;
   background:#F3F4FF;
-  border:1px solid #DBDFFF;
+  padding:14px;
   border-radius:14px;
+  margin-top:15px;
 }
-
-.total-row span{
-  font-size:14px;
-}
-
-.total-row strong{
-  font-size:16px;
-  color:var(--primary-dark);
-}
-
-.success-box{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-  padding:25px 8px;
-  width:100%;
-}
-
-.success-icon{
-  font-size:48px;
-  margin-bottom:14px;
-}
-
 .payment-box{
   width:100%;
   background:#F3F4FF;
-  border:1px solid #DBDFFF;
-  border-radius:16px;
   padding:16px;
-  margin-bottom:16px;
-}
-
-.payment-label{
-  font-size:13px;
-  color:var(--muted);
-  margin-bottom:6px;
-}
-
-.payment-amount{
-  font-size:20px;
-  font-weight:700;
-  color:var(--primary-dark);
-}
-
-.card-number-box{
-  width:100%;
-  border:1px solid var(--border);
   border-radius:16px;
-  padding:16px;
-  margin-bottom:16px;
-  background:#FAFBFC;
-}
-
-.card-number{
-  font-size:18px;
-  font-weight:700;
-  direction:ltr;
-  letter-spacing:1px;
-  margin-bottom:10px;
-}
-
-.copy-btn{
-  width:100%;
-  background:#fff;
-  border:1px solid var(--border);
-  color:var(--text);
-}
-
-.eitaa-box{
-  width:100%;
-  background:#FFF8E8;
-  border:1px solid #F1DFA8;
-  border-radius:16px;
-  padding:16px;
-  font-size:13.5px;
-  line-height:2;
-  margin-bottom:16px;
-}
-
-.eitaa-id{
-  direction:ltr;
-  display:inline-block;
-  color:var(--primary-dark);
-  font-size:15px;
-  font-weight:700;
-}
-
-.note{
-  font-size:12px;
-  color:var(--muted);
-  line-height:1.8;
-  margin:0;
-}
-
-@media(max-width:420px){
-  .class-grid,
-  .summary-class-grid{
-    gap:9px;
-  }
+  text-align:center;
 }
 </style>
 </head>
 
 <body>
-
 <div class="wrap">
 
-  <!-- PROGRESS -->
-  <div class="progress" id="progress">
-    <div id="p1" class="active"></div>
-    <div id="p2"></div>
-    <div id="p3"></div>
-  </div>
-
-
-  <!-- =========================
-       STEP 1
-  ========================== -->
-
-  <div class="card" id="step1">
-
-    <h1>اطلاعات فردی</h1>
-
-    <p class="sub">
-      برای شروع ثبت‌نام، اطلاعاتت رو وارد کن
-    </p>
-
-
-    <label>نام و نام خانوادگی</label>
-
-    <input
-      type="text"
-      id="fullname"
-      placeholder="نام و نام خانوادگی را وارد کن"
-      autocomplete="name"
-    >
-
-
-    <label>کد ملی</label>
-
-    <input
-      type="tel"
-      id="nationalCode"
-      placeholder="مثلاً 0012345678"
-      inputmode="numeric"
-      maxlength="10"
-    >
-
-    <p id="nationalCodeError" class="error">
-      کد ملی واردشده صحیح نیست
-    </p>
-
-
-    <label>نام پدر</label>
-
-    <input
-      type="text"
-      id="fatherName"
-      placeholder="نام پدر را وارد کن"
-    >
-
-
-    <label>تاریخ تولد</label>
-
-    <input
-      type="text"
-      id="birthDate"
-      placeholder="مثلاً 1388/05/20"
-      maxlength="10"
-    >
-
-    <p id="birthDateError" class="error">
-      تاریخ تولد را به صورت 1400/01/01 وارد کنید
-    </p>
-
-
-    <label>شماره همراه</label>
-
-    <input
-      type="tel"
-      id="phone"
-      placeholder="مثلاً 09123456789"
-      inputmode="numeric"
-      maxlength="11"
-    >
-
-    <p id="phoneError" class="error">
-      شماره همراه باید دقیقاً ۱۱ رقم باشد
-    </p>
-
-
-    <label>شماره ثابت</label>
-
-    <input
-      type="tel"
-      id="landline"
-      placeholder="مثلاً 02112345678"
-      inputmode="numeric"
-      maxlength="11"
-    >
-
-    <p id="landlineError" class="error">
-      شماره ثابت را صحیح وارد کنید
-    </p>
-
-
-    <div class="row-btns">
-
-      <button
-        class="btn btn-primary"
-        onclick="goStep(2)"
-      >
-        مرحله بعد
-      </button>
-
-    </div>
-
-  </div>
-
-
-
-  <!-- =========================
-       STEP 2
-  ========================== -->
-
-  <div
-    class="card"
-    id="step2"
-    style="display:none;"
-  >
-
-    <h1>انتخاب کلاس‌ها</h1>
-
-    <p class="sub">
-      می‌تونی چند کلاس رو هم‌زمان انتخاب کنی
-    </p>
-
-    <div
-      class="class-grid"
-      id="classGrid"
-    ></div>
-
-
-    <div class="row-btns">
-
-      <button
-        class="btn btn-ghost"
-        onclick="goStep(1)"
-      >
-        قبلی
-      </button>
-
-      <button
-        class="btn btn-primary"
-        onclick="goStep(3)"
-      >
-        مرحله بعد
-      </button>
-
-    </div>
-
-  </div>
-
-
-
-  <!-- =========================
-       STEP 3
-  ========================== -->
-
-  <div
-    class="card"
-    id="step3"
-    style="display:none;"
-  >
-
-    <h1>خلاصه ثبت‌نام</h1>
-
-    <p class="sub">
-      اگه اطلاعات درسته، ثبت‌نام رو نهایی کن
-    </p>
-
-
-    <div class="summary-item">
-      <span>نام و نام خانوادگی</span>
-      <strong id="sumName"></strong>
-    </div>
-
-    <div class="summary-item">
-      <span>کد ملی</span>
-      <strong id="sumNationalCode"></strong>
-    </div>
-
-    <div class="summary-item">
-      <span>نام پدر</span>
-      <strong id="sumFatherName"></strong>
-    </div>
-
-    <div class="summary-item">
-      <span>تاریخ تولد</span>
-      <strong id="sumBirthDate"></strong>
-    </div>
-
-    <div class="summary-item">
-      <span>شماره همراه</span>
-      <strong id="sumPhone"></strong>
-    </div>
-
-    <div class="summary-item">
-      <span>شماره ثابت</span>
-      <strong id="sumLandline"></strong>
-    </div>
-
-
-    <div class="summary-classes">
-
-      <label>کلاس‌های انتخابی</label>
-
-      <div
-        class="summary-class-grid"
-        id="sumClasses"
-      ></div>
-
-    </div>
-
-
-    <div class="total-row">
-
-      <span>
-        مجموع هزینه کلاس‌ها:
-      </span>
-
-      <strong id="sumTotal"></strong>
-
-    </div>
-
-
-    <div class="row-btns">
-
-      <button
-        class="btn btn-ghost"
-        onclick="goStep(2)"
-      >
-        قبلی
-      </button>
-
-      <button
-        class="btn btn-primary"
-        onclick="submitForm()"
-      >
-        ثبت‌نام نهایی
-      </button>
-
-    </div>
-
-  </div>
-
-
-
-  <!-- =========================
-       STEP 4 PAYMENT
-  ========================== -->
-
-  <div
-    class="card"
-    id="step4"
-    style="display:none;"
-  >
-
-    <div class="success-box">
-
-      <div class="success-icon">
-        ✅
-      </div>
-
-
-      <h1>
-        ثبت‌نام با موفقیت انجام شد
-      </h1>
-
-
-      <p class="sub">
-        برای تکمیل ثبت‌نام، مبلغ زیر را واریز کنید.
-      </p>
-
-
-      <div class="payment-box">
-
-        <div class="payment-label">
-          مبلغ قابل پرداخت
-        </div>
-
-        <div
-          class="payment-amount"
-          id="paymentAmount"
-        >
-          ۰ تومان
-        </div>
-
-      </div>
-
-
-      <div class="card-number-box">
-
-        <div class="payment-label">
-          شماره کارت
-        </div>
-
-
-        <!-- شماره کارت را اینجا عوض کن -->
-
-        <div
-          class="card-number"
-          id="cardNumber"
-        >
-          6219861952461035
-        </div>
-
-
-        <button
-          class="btn copy-btn"
-          onclick="copyCardNumber()"
-        >
-          📋 کپی شماره کارت
-        </button>
-
-
-        <div
-          style="
-            font-size:12.5px;
-            color:var(--muted);
-            margin-top:10px;
-          "
-        >
-
-          به نام:
-
-          <!-- نام صاحب کارت را اینجا عوض کن -->
-
-          <strong>
-            محمدامین رضاصفت
-          </strong>
-
-        </div>
-
-      </div>
-
-
-      <div class="eitaa-box">
-
-        <strong>
-          📱 ارسال فیش واریزی
-        </strong>
-
-        <br>
-
-        پس از واریز، فیش واریزی را به آیدی زیر
-        در پیام‌رسان ایتا ارسال نمایید:
-
-        <br>
-
-        <!-- آیدی ایتا را اینجا عوض کن -->
-
-        <span
-          class="eitaa-id"
-          id="eitaaId"
-        >
-          @m_amin_128
-        </span>
-
-      </div>
-
-
-      <p class="note">
-
-        ثبت‌نام شما انجام شده است و پس از بررسی
-        فیش واریزی، پرداخت شما تأیید خواهد شد.
-
-      </p>
-
-    </div>
-
-  </div>
+<div class="progress" id="progress">
+<div id="p1" class="active"></div>
+<div id="p2"></div>
+<div id="p3"></div>
+</div>
+
+<div class="card" id="step1">
+<h2>اطلاعات فردی</h2>
+
+<label>نام و نام خانوادگی</label>
+<input id="fullname">
+
+<label>کد ملی</label>
+<input id="nationalCode">
+<p id="nationalCodeError" class="error">کد ملی صحیح نیست</p>
+
+<label>نام پدر</label>
+<input id="fatherName">
+
+<label>تاریخ تولد</label>
+<input id="birthDate" placeholder="۱۴۰۰/۰۱/۰۱">
+
+<label>شماره همراه</label>
+<input id="phone">
+
+<label>شماره ثابت</label>
+<input id="landline">
+
+<div class="row-btns">
+<button class="btn btn-primary" onclick="goStep(2)">مرحله بعد</button>
+</div>
+</div>
+
+<div class="card" id="step2" style="display:none">
+<h2>انتخاب کلاس‌ها</h2>
+<div class="class-grid" id="classGrid"></div>
+
+<div class="row-btns">
+<button class="btn btn-ghost" onclick="goStep(1)">قبلی</button>
+<button class="btn btn-primary" onclick="goStep(3)">مرحله بعد</button>
+</div>
+</div>
+
+<div class="card" id="step3" style="display:none">
+<h2>خلاصه ثبت‌نام</h2>
+
+<div class="summary-item"><span>نام</span><strong id="sumName"></strong></div>
+<div class="summary-item"><span>کد ملی</span><strong id="sumNationalCode"></strong></div>
+<div class="summary-item"><span>نام پدر</span><strong id="sumFatherName"></strong></div>
+<div class="summary-item"><span>تولد</span><strong id="sumBirthDate"></strong></div>
+<div class="summary-item"><span>همراه</span><strong id="sumPhone"></strong></div>
+<div class="summary-item"><span>ثابت</span><strong id="sumLandline"></strong></div>
+
+<div id="sumClasses"></div>
+
+<div class="total-row">
+<span>مجموع هزینه</span>
+<strong id="sumTotal"></strong>
+</div>
+
+<div class="row-btns">
+<button class="btn btn-ghost" onclick="goStep(2)">قبلی</button>
+<button class="btn btn-primary" onclick="submitForm()">ثبت‌نام نهایی</button>
+</div>
+</div>
+
+<div class="card" id="step4" style="display:none">
+<h2 style="text-align:center">ثبت‌نام با موفقیت انجام شد</h2>
+
+<div class="payment-box">
+<div>مبلغ قابل پرداخت</div>
+<h2 id="paymentAmount"></h2>
+</div>
+
+<p style="text-align:center">
+شماره کارت
+<br><br>
+<strong id="cardNumber">6219861952461035</strong>
+<br><br>
+به نام نام صاحب کارت
+</p>
+
+<p style="text-align:center">
+پس از واریز، فیش واریزی را در ایتا به آیدی زیر ارسال کنید:
+<br><br>
+<strong>@m_amin_128</strong>
+</p>
+</div>
 
 </div>
 
-
 <script>
 
-/* =====================================================
-   GOOGLE APPS SCRIPT URL
-===================================================== */
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzfoCnklXATD20wZaqrcHjItTQEdV9D3VI4I5A-zwYMiZXjAzJNErDuIKW0he6k4IRw/exec';
 
-const SCRIPT_URL =
-'https://script.google.com/macros/s/AKfycbzfoCnklXATD20wZaqrcHjItTQEdV9D3VI4I5A-zwYMiZXjAzJNErDuIKW0he6k4IRw/exec';
-
-
-
-/* =====================================================
-   CLASSES
-===================================================== */
-
-const classes = [
-
-  {
-    id:'c1',
-    name:'خطاطی',
-    meta:'استاد محمدرضا صفالو',
-    price:480000,
-    img:'images/khatati.jpg'
-  },
-
-  {
-    id:'c2',
-    name:'عکاسی',
-    meta:'استاد محمدعارف رضاصفت',
-    price:550000,
-    img:'images/akasi.jpg'
-  },
-
-  {
-    id:'c3',
-    name:'تدوین',
-    meta:'استاد محمدحسین حسین‌مردی',
-    price:1200000,
-    img:'images/tadvin.jpg'
-  },
-
-  {
-    id:'c4',
-    name:'کورل',
-    meta:'استاد متین رضایت',
-    price:680000,
-    img:'images/corel.jpg'
-  },
-
-  {
-    id:'c5',
-    name:'شاعری',
-    meta:'استاد حسین معصومی',
-    price:350000,
-    img:'images/shaeri.jpg'
-  },
-
-  /* ==========================
-     پک جامع
-     قیمت اصلی: 3,260,000
-     قیمت تخفیف: 3,000,000
-  ========================== */
-
-  {
-    id:'all',
-    name:'پک جامع',
-    meta:'شامل تمام کلاس‌ها',
-    price:3000000,
-    oldPrice:3260000,
-    img:'images/pak-jame.jpg'
-  }
-
+const classes=[
+{id:'c1',name:'خطاطی',price:480000,img:'images/khatati.jpg'},
+{id:'c2',name:'عکاسی',price:550000,img:'images/akasi.jpg'},
+{id:'c3',name:'تدوین',price:1200000,img:'images/tadvin.jpg'},
+{id:'c4',name:'کورل',price:680000,img:'images/corel.jpg'},
+{id:'c5',name:'شاعری',price:350000,img:'images/shaeri.jpg'},
+{id:'all',name:'پک جامع',price:3000000,oldPrice:3260000,img:'images/pak-jame.jpg'}
 ];
 
+const selected=new Set();
 
-const selected = new Set();
-
-
-
-/* =====================================================
-   FORMAT PRICE
-===================================================== */
-
-function formatPrice(num){
-
-  return num.toLocaleString('fa-IR') + ' تومان';
-
+function toEnglishNumbers(v){
+return v.replace(/[۰-۹]/g,d=>String(d.charCodeAt(0)-1776))
+.replace(/[٠-٩]/g,d=>String(d.charCodeAt(0)-1632));
 }
 
+['nationalCode','phone','landline','birthDate'].forEach(id=>{
+document.getElementById(id).addEventListener('input',function(){
+this.value=toEnglishNumbers(this.value);
+});
+});
 
-
-/* =====================================================
-   RENDER CLASSES
-===================================================== */
+function formatPrice(n){
+return n.toLocaleString('fa-IR')+' تومان';
+}
 
 function renderClasses(){
-
-  const grid =
-    document.getElementById('classGrid');
-
-
-  grid.innerHTML =
-    classes.map(c => `
-
-      <div
-        class="class-card"
-        id="card-${c.id}"
-        onclick="toggleClass('${c.id}')"
-      >
-
-        <img
-          src="${c.img}"
-          alt="${c.name}"
-          loading="lazy"
-        >
-
-        <div class="class-body">
-
-          <p class="class-name">
-            ${c.name}
-          </p>
-
-          <p class="class-meta">
-            ${c.meta}
-          </p>
-
-          ${
-            c.oldPrice
-            ?
-            `
-              <p class="class-price">
-
-                <span class="old-price">
-                  ${formatPrice(c.oldPrice)}
-                </span>
-
-                <br>
-
-                <span class="new-price">
-                  ${formatPrice(c.price)}
-                </span>
-
-              </p>
-            `
-            :
-            `
-              <p class="class-price">
-                ${formatPrice(c.price)}
-              </p>
-            `
-          }
-
-        </div>
-
-      </div>
-
-    `).join('');
-
+classGrid.innerHTML=classes.map(c=>`
+<div class="class-card" id="card-${c.id}" onclick="toggleClass('${c.id}')">
+<img src="${c.img}">
+<div class="class-body">
+<b>${c.name}</b><br>
+${c.oldPrice?`<span class="old-price">${formatPrice(c.oldPrice)}</span><br><span class="new-price">${formatPrice(c.price)}</span>`:formatPrice(c.price)}
+</div>
+</div>`).join('');
 }
-
-
-
-/* =====================================================
-   TOGGLE CLASS
-===================================================== */
 
 function toggleClass(id){
-
-  const card =
-    document.getElementById('card-' + id);
-
-
-  /* پک جامع */
-
-  if(id === 'all'){
-
-    if(selected.has('all')){
-
-      selected.delete('all');
-
-      card.classList.remove('selected');
-
-    }else{
-
-      selected.clear();
-
-      document
-        .querySelectorAll('.class-card')
-        .forEach(el =>
-          el.classList.remove('selected')
-        );
-
-      selected.add('all');
-
-      card.classList.add('selected');
-
-    }
-
-    return;
-
-  }
-
-
-  /* کلاس عادی */
-
-  if(selected.has(id)){
-
-    selected.delete(id);
-
-    card.classList.remove('selected');
-
-  }else{
-
-    if(selected.has('all')){
-
-      selected.delete('all');
-
-      document
-        .getElementById('card-all')
-        .classList.remove('selected');
-
-    }
-
-    selected.add(id);
-
-    card.classList.add('selected');
-
-  }
-
+if(id==='all'){
+selected.clear();
+document.querySelectorAll('.class-card').forEach(x=>x.classList.remove('selected'));
+selected.add('all');
+document.getElementById('card-all').classList.add('selected');
+return;
+}
+if(selected.has('all')){
+selected.delete('all');
+document.getElementById('card-all').classList.remove('selected');
+}
+const card=document.getElementById('card-'+id);
+if(selected.has(id)){
+selected.delete(id);card.classList.remove('selected');
+}else{
+selected.add(id);card.classList.add('selected');
+}
 }
 
-
-
-/* =====================================================
-   INPUT CLEANING
-   پشتیبانی از اعداد فارسی، عربی و انگلیسی
-===================================================== */
-
-function toEnglishNumbers(value) {
-
-  return value
-    .replace(/[۰-۹]/g, function(d) {
-      return String(d.charCodeAt(0) - 1776);
-    })
-    .replace(/[٠-٩]/g, function(d) {
-      return String(d.charCodeAt(0) - 1632);
-    });
-
+function goStep(n){
+if(n===2){
+if(!fullname.value.trim()||!nationalCode.value.trim()||!fatherName.value.trim()||!birthDate.value.trim()||!phone.value.trim()||!landline.value.trim()){
+alert('همه فیلدها را کامل کن');return;
 }
-
-
-/* =====================================================
-   کد ملی
-===================================================== */
-
-document
-  .getElementById('nationalCode')
-  .addEventListener('input', function() {
-
-    this.value = toEnglishNumbers(this.value)
-      .replace(/[^0-9]/g, '')
-      .slice(0, 10);
-
-  });
-
-
-/* =====================================================
-   شماره همراه
-===================================================== */
-
-document
-  .getElementById('phone')
-  .addEventListener('input', function() {
-
-    this.value = toEnglishNumbers(this.value)
-      .replace(/[^0-9]/g, '')
-      .slice(0, 11);
-
-  });
-
-
-/* =====================================================
-   شماره ثابت
-===================================================== */
-
-document
-  .getElementById('landline')
-  .addEventListener('input', function() {
-
-    this.value = toEnglishNumbers(this.value)
-      .replace(/[^0-9]/g, '')
-      .slice(0, 11);
-
-  });
-
-
-/* =====================================================
-   تاریخ تولد
-===================================================== */
-
-document
-  .getElementById('birthDate')
-  .addEventListener('input', function() {
-
-    this.value = toEnglishNumbers(this.value)
-      .replace(/[^0-9\/]/g, '')
-      .slice(0, 10);
-
-  });
-
-
-
-/* =====================================================
-   SUMMARY
-===================================================== */
+}
+if(n===3&&selected.size===0){alert('حداقل یک کلاس انتخاب کن');return;}
+['1','2','3'].forEach(i=>{
+document.getElementById('step'+i).style.display=i==n?'block':'none';
+document.getElementById('p'+i).classList.toggle('active',i<=n);
+});
+if(n===3)fillSummary();
+}
 
 function fillSummary(){
+sumName.textContent=fullname.value;
+sumNationalCode.textContent=nationalCode.value;
+sumFatherName.textContent=fatherName.value;
+sumBirthDate.textContent=birthDate.value;
+sumPhone.textContent=phone.value;
+sumLandline.textContent=landline.value;
 
-  document
-    .getElementById('sumName')
-    .textContent =
-      document
-      .getElementById('fullname')
-      .value;
-
-
-  document
-    .getElementById('sumNationalCode')
-    .textContent =
-      document
-      .getElementById('nationalCode')
-      .value;
-
-
-  document
-    .getElementById('sumFatherName')
-    .textContent =
-      document
-      .getElementById('fatherName')
-      .value;
-
-
-  document
-    .getElementById('sumBirthDate')
-    .textContent =
-      document
-      .getElementById('birthDate')
-      .value;
-
-
-  document
-    .getElementById('sumPhone')
-    .textContent =
-      document
-      .getElementById('phone')
-      .value;
-
-
-  document
-    .getElementById('sumLandline')
-    .textContent =
-      document
-      .getElementById('landline')
-      .value;
-
-
-  let total = 0;
-
-
-  const cards =
-    [...selected]
-    .map(id=>{
-
-      const c =
-        classes.find(x=>x.id===id);
-
-
-      total += c.price;
-
-
-      return `
-
-        <div class="summary-class-card">
-
-          <img
-            src="${c.img}"
-            alt="${c.name}"
-            loading="lazy"
-          >
-
-          <div class="name">
-            ${c.name}
-          </div>
-
-          <div class="price">
-
-            ${
-              c.oldPrice
-              ?
-              `
-                <span
-                  style="
-                    text-decoration:line-through;
-                    color:#999;
-                    margin-left:4px;
-                  "
-                >
-                  ${formatPrice(c.oldPrice)}
-                </span>
-
-                <br>
-
-                <strong style="color:var(--primary-dark)">
-                  ${formatPrice(c.price)}
-                </strong>
-              `
-              :
-              formatPrice(c.price)
-            }
-
-          </div>
-
-        </div>
-
-      `;
-
-    })
-    .join('');
-
-
-  document
-    .getElementById('sumClasses')
-    .innerHTML = cards;
-
-
-  document
-    .getElementById('sumTotal')
-    .textContent =
-      formatPrice(total);
-
+let total=0;
+sumClasses.innerHTML=[...selected].map(id=>{
+const c=classes.find(x=>x.id===id);
+total+=c.price;
+return `<p>${c.name} - ${formatPrice(c.price)}</p>`;
+}).join('');
+sumTotal.textContent=formatPrice(total);
 }
-
-
-
-/* =====================================================
-   SUBMIT
-===================================================== */
 
 function submitForm(){
-
-  const name =
-    document.getElementById('fullname')
-    .value.trim();
-
-
-  const nationalCode =
-    document.getElementById('nationalCode')
-    .value.trim();
-
-
-  const fatherName =
-    document.getElementById('fatherName')
-    .value.trim();
-
-
-  const birthDate =
-    document.getElementById('birthDate')
-    .value.trim();
-
-
-  const phone =
-    document.getElementById('phone')
-    .value.trim();
-
-
-  const landline =
-    document.getElementById('landline')
-    .value.trim();
-
-
-  const total =
-    [...selected].reduce(
-      (sum,id)=>{
-
-        const c =
-          classes.find(x=>x.id===id);
-
-        return sum + c.price;
-
-      },
-      0
-    );
-
-
-  const data = {
-
-    name:name,
-
-    nationalCode:nationalCode,
-
-    fatherName:fatherName,
-
-    birthDate:birthDate,
-
-    phone:phone,
-
-    landline:landline,
-
-    classes:
-      [...selected].map(
-        id =>
-          classes
-          .find(c=>c.id===id)
-          .name
-      ),
-
-    total:total
-
-  };
-
-
-  const btn =
-    document
-    .querySelector('#step3 .btn-primary');
-
-
-  btn.disabled=true;
-
-  btn.textContent=
-    'در حال ثبت...';
-
-
-  fetch(
-    SCRIPT_URL,
-    {
-      method:'POST',
-
-      headers:{
-        'Content-Type':
-          'text/plain;charset=utf-8'
-      },
-
-      body:
-        JSON.stringify(data)
-    }
-  )
-
-  .then(res=>res.json())
-
-  .then(result=>{
-
-    btn.disabled=false;
-
-    btn.textContent=
-      'ثبت‌نام نهایی';
-
-
-    if(result.status === 'duplicate'){
-
-      alert(
-        'این کد ملی قبلاً ثبت‌نام کرده است'
-      );
-
-      return;
-
-    }
-
-
-    if(result.status !== 'success'){
-
-      alert(
-        'ثبت اطلاعات با مشکل مواجه شد'
-      );
-
-      return;
-
-    }
-
-
-    document
-      .getElementById('paymentAmount')
-      .textContent =
-        formatPrice(total);
-
-
-    ['1','2','3'].forEach(i=>{
-
-      document
-        .getElementById('step'+i)
-        .style.display='none';
-
-    });
-
-
-    document
-      .getElementById('step4')
-      .style.display='block';
-
-
-    document
-      .getElementById('progress')
-      .style.display='none';
-
-
-    window.scrollTo(0,0);
-
-  })
-
-
-  .catch(err=>{
-
-    btn.disabled=false;
-
-    btn.textContent=
-      'ثبت‌نام نهایی';
-
-
-    alert(
-      'مشکلی در ارسال اطلاعات پیش آمد، دوباره امتحان کن'
-    );
-
-    console.error(err);
-
-  });
-
+const total=[...selected].reduce((s,id)=>s+classes.find(c=>c.id===id).price,0);
+
+fetch(SCRIPT_URL,{
+method:'POST',
+headers:{'Content-Type':'text/plain;charset=utf-8'},
+body:JSON.stringify({
+name:fullname.value,
+nationalCode:nationalCode.value,
+fatherName:fatherName.value,
+birthDate:birthDate.value,
+phone:phone.value,
+landline:landline.value,
+classes:[...selected].map(id=>classes.find(c=>c.id===id).name),
+total:total
+})
+})
+.then(r=>r.json())
+.then(r=>{
+if(r.status==='duplicate'){
+alert('این کد ملی قبلاً ثبت‌نام کرده است');return;
 }
-
-
-
-/* =====================================================
-   COPY CARD
-===================================================== */
-
-function copyCardNumber(){
-
-  const card =
-    document
-    .getElementById('cardNumber')
-    .textContent
-    .trim();
-
-
-  navigator.clipboard
-    .writeText(
-      card.replace(/\s/g,'')
-    )
-
-    .then(()=>{
-
-      alert(
-        'شماره کارت کپی شد'
-      );
-
-    })
-
-    .catch(()=>{
-
-      alert(
-        'کپی شماره کارت انجام نشد'
-      );
-
-    });
-
+paymentAmount.textContent=formatPrice(total);
+['1','2','3'].forEach(i=>document.getElementById('step'+i).style.display='none');
+step4.style.display='block';
+progress.style.display='none';
+})
+.catch(()=>alert('خطا در ارسال اطلاعات'));
 }
-
-
-
-/* =====================================================
-   START
-===================================================== */
 
 renderClasses();
 
 </script>
-
 </body>
 </html>
