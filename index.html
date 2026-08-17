@@ -1012,267 +1012,80 @@ function toggleClass(id){
 
 /* =====================================================
    INPUT CLEANING
+   پشتیبانی از اعداد فارسی، عربی و انگلیسی
 ===================================================== */
 
-document
-.getElementById('nationalCode')
-.addEventListener('input',function(){
+function toEnglishNumbers(value) {
 
-  this.value =
-    this.value
-    .replace(/[^0-9]/g,'')
-    .slice(0,10);
-
-});
-
-
-document
-.getElementById('phone')
-.addEventListener('input',function(){
-
-  this.value =
-    this.value
-    .replace(/[^0-9]/g,'')
-    .slice(0,11);
-
-});
-
-
-document
-.getElementById('landline')
-.addEventListener('input',function(){
-
-  this.value =
-    this.value
-    .replace(/[^0-9]/g,'')
-    .slice(0,11);
-
-});
-
-
-/* =====================================================
-   NATIONAL CODE VALIDATION
-===================================================== */
-
-function isValidNationalCode(code){
-
-  if(!/^\d{10}$/.test(code)){
-    return false;
-  }
-
-  if(/^(\d)\1{9}$/.test(code)){
-    return false;
-  }
-
-  let sum = 0;
-
-  for(let i=0;i<9;i++){
-
-    sum +=
-      parseInt(code[i],10)
-      * (10-i);
-
-  }
-
-  const remainder =
-    sum % 11;
-
-  const control =
-    parseInt(code[9],10);
-
-
-  if(remainder < 2){
-
-    return control === remainder;
-
-  }
-
-  return control === 11 - remainder;
+  return value
+    .replace(/[۰-۹]/g, function(d) {
+      return String(d.charCodeAt(0) - 1776);
+    })
+    .replace(/[٠-٩]/g, function(d) {
+      return String(d.charCodeAt(0) - 1632);
+    });
 
 }
 
 
-
 /* =====================================================
-   BIRTH DATE
+   کد ملی
 ===================================================== */
 
-function isValidBirthDate(date){
-
-  return /^\d{4}\/\d{2}\/\d{2}$/.test(date);
-
-}
-
-
-
-/* =====================================================
-   GO STEP
-===================================================== */
-
-function goStep(n){
-
-  if(n === 2){
-
-    const name =
-      document.getElementById('fullname')
-      .value.trim();
-
-
-    const nationalCode =
-      document.getElementById('nationalCode')
-      .value.trim();
-
-
-    const fatherName =
-      document.getElementById('fatherName')
-      .value.trim();
-
-
-    const birthDate =
-      document.getElementById('birthDate')
-      .value.trim();
-
-
-    const phone =
-      document.getElementById('phone')
-      .value.trim();
-
-
-    const landline =
-      document.getElementById('landline')
-      .value.trim();
-
-
-    if(!name){
-
-      alert(
-        'لطفاً نام و نام خانوادگی را وارد کن'
-      );
-
-      return;
-
-    }
-
-
-    if(!isValidNationalCode(nationalCode)){
-
-      document
-        .getElementById('nationalCodeError')
-        .style.display='block';
-
-      return;
-
-    }
-
-    document
-      .getElementById('nationalCodeError')
-      .style.display='none';
-
-
-    if(!fatherName){
-
-      alert(
-        'لطفاً نام پدر را وارد کن'
-      );
-
-      return;
-
-    }
-
-
-    if(!isValidBirthDate(birthDate)){
-
-      document
-        .getElementById('birthDateError')
-        .style.display='block';
-
-      return;
-
-    }
-
-    document
-      .getElementById('birthDateError')
-      .style.display='none';
-
-
-    if(!/^09\d{9}$/.test(phone)){
-
-      document
-        .getElementById('phoneError')
-        .style.display='block';
-
-      return;
-
-    }
-
-    document
-      .getElementById('phoneError')
-      .style.display='none';
-
-
-    if(!/^\d{11}$/.test(landline)){
-
-      document
-        .getElementById('landlineError')
-        .style.display='block';
-
-      return;
-
-    }
-
-    document
-      .getElementById('landlineError')
-      .style.display='none';
-
-  }
-
-
-  if(n === 3){
-
-    if(selected.size === 0){
-
-      alert(
-        'حداقل یک کلاس را انتخاب کن'
-      );
-
-      return;
-
-    }
-
-  }
-
-
-  ['1','2','3'].forEach(i=>{
-
-    document
-      .getElementById('step'+i)
-      .style.display =
-        i === String(n)
-        ? 'block'
-        : 'none';
-
-
-    document
-      .getElementById('p'+i)
-      .classList
-      .toggle(
-        'active',
-        Number(i) <= n
-      );
+document
+  .getElementById('nationalCode')
+  .addEventListener('input', function() {
+
+    this.value = toEnglishNumbers(this.value)
+      .replace(/[^0-9]/g, '')
+      .slice(0, 10);
 
   });
 
 
-  if(n === 3){
+/* =====================================================
+   شماره همراه
+===================================================== */
 
-    fillSummary();
+document
+  .getElementById('phone')
+  .addEventListener('input', function() {
 
-  }
+    this.value = toEnglishNumbers(this.value)
+      .replace(/[^0-9]/g, '')
+      .slice(0, 11);
+
+  });
 
 
-  window.scrollTo(0,0);
+/* =====================================================
+   شماره ثابت
+===================================================== */
 
-}
+document
+  .getElementById('landline')
+  .addEventListener('input', function() {
+
+    this.value = toEnglishNumbers(this.value)
+      .replace(/[^0-9]/g, '')
+      .slice(0, 11);
+
+  });
+
+
+/* =====================================================
+   تاریخ تولد
+===================================================== */
+
+document
+  .getElementById('birthDate')
+  .addEventListener('input', function() {
+
+    this.value = toEnglishNumbers(this.value)
+      .replace(/[^0-9\/]/g, '')
+      .slice(0, 10);
+
+  });
 
 
 
