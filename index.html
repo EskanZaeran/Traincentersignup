@@ -18,6 +18,8 @@
   --primary-dark:#3A46D9;
   --danger:#E5484D;
   --success:#22C55E;
+  --eitaa:#F5841F;
+  --eitaa-dark:#DD7315;
   --radius:20px;
   --shadow:0 4px 20px rgba(31,36,48,0.06);
 }
@@ -36,7 +38,6 @@ body{
 
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes slideUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-@keyframes popIn{0%{opacity:0;transform:scale(.9)}60%{opacity:1;transform:scale(1.02)}100%{transform:scale(1)}}
 @keyframes checkPop{0%{transform:scale(0) rotate(-20deg);opacity:0}60%{transform:scale(1.15) rotate(4deg);opacity:1}100%{transform:scale(1) rotate(0)}}
 @keyframes shake{
   10%,90%{transform:translateX(-1px)}
@@ -141,6 +142,7 @@ input.invalid{
 .class-card img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;transition:transform .3s ease}
 .class-card:hover img{transform:scale(1.04)}
 .class-body{text-align:center;padding:10px}
+.class-teacher{font-size:11.5px;color:var(--muted);margin:2px 0 6px}
 .old-price{text-decoration:line-through;color:#999;font-size:11px}
 .new-price{font-weight:bold;color:var(--primary-dark)}
 
@@ -214,6 +216,29 @@ input.invalid{
 .copy-card:active{transform:scale(.97)}
 .copy-card:hover{background:#F0F1FB;border-color:var(--primary)}
 .copy-hint{font-size:11px;color:var(--muted);margin-top:6px}
+
+.eitaa-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  background:var(--eitaa);
+  color:#fff;
+  border:none;
+  border-radius:14px;
+  padding:13px 26px;
+  font-family:inherit;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  text-decoration:none;
+  margin-top:10px;
+  box-shadow:0 6px 16px rgba(245,132,31,.28);
+  transition:transform .12s ease, background .2s ease;
+  min-height:48px;
+}
+.eitaa-btn:active{transform:scale(.96)}
+.eitaa-btn:hover{background:var(--eitaa-dark)}
 
 #toast{
   position:fixed;
@@ -318,21 +343,32 @@ input.invalid{
 <p style="text-align:center;margin-top:20px">
 شماره کارت
 <br><br>
-<button class="copy-card" onclick="copyCard()">
+<button class="copy-card" onclick="copyText('cardNumber','cardCopyHint')">
   <span id="cardNumber">6219861952461035</span>
-  <span id="copyIcon">📋</span>
+  <span id="cardCopyIcon">📋</span>
 </button>
 <br>
-<span class="copy-hint" id="copyHint">برای کپی روی شماره بزن</span>
+<span class="copy-hint" id="cardCopyHint">برای کپی روی شماره بزن</span>
 <br><br>
-به نام محمدامین رضاصفت
+به نام نام صاحب کارت
 </p>
 
-<p style="text-align:center">
-پس از واریز، فیش واریزی را در ایتا به آیدی زیر ارسال کنید:
-<br><br>
-<strong>@m_amin_128</strong>
-</p>
+<div style="text-align:center;margin-top:24px">
+<p style="margin-bottom:10px">پس از واریز، فیش واریزی را در ایتا به آیدی زیر ارسال کنید:</p>
+
+<button class="copy-card" onclick="copyText('eitaaId','eitaaCopyHint')">
+  <span id="eitaaId">@m_amin_128</span>
+  <span id="eitaaCopyIcon">📋</span>
+</button>
+<br>
+<span class="copy-hint" id="eitaaCopyHint">برای کپی روی آیدی بزن</span>
+
+<br>
+
+<a class="eitaa-btn" href="https://eitaa.com/m_amin_128" target="_blank" rel="noopener">
+برو به ایتا
+</a>
+</div>
 </div>
 
 </div>
@@ -344,11 +380,11 @@ input.invalid{
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzfoCnklXATD20wZaqrcHjItTQEdV9D3VI4I5A-zwYMiZXjAzJNErDuIKW0he6k4IRw/exec';
 
 const classes=[
-{id:'c1',name:'خطاطی',price:480000,img:'images/khatati.jpg'},
-{id:'c2',name:'عکاسی',price:550000,img:'images/akasi.jpg'},
-{id:'c3',name:'تدوین',price:1200000,img:'images/tadvin.jpg'},
-{id:'c4',name:'کورل',price:680000,img:'images/corel.jpg'},
-{id:'c5',name:'شاعری',price:350000,img:'images/shaeri.jpg'},
+{id:'c1',name:'خطاطی',teacher:'استاد محمدرضا صفالو',price:480000,img:'images/khatati.jpg'},
+{id:'c2',name:'عکاسی',teacher:'استاد محمدعارف رضاصفت',price:550000,img:'images/akasi.jpg'},
+{id:'c3',name:'تدوین',teacher:'استاد محمدحسین حسین‌مردی',price:1200000,img:'images/tadvin.jpg'},
+{id:'c4',name:'کورل',teacher:'استاد متین رضایت',price:680000,img:'images/corel.jpg'},
+{id:'c5',name:'شاعری',teacher:'استاد حسین معصومی',price:350000,img:'images/shaeri.jpg'},
 {id:'all',name:'پک جامع',price:3000000,oldPrice:3260000,img:'images/pak-jame.jpg'}
 ];
 
@@ -375,7 +411,8 @@ classGrid.innerHTML=classes.map((c,i)=>`
 <div class="class-card" id="card-${c.id}" style="animation-delay:${i*.05}s" onclick="toggleClass('${c.id}')">
 <img src="${c.img}">
 <div class="class-body">
-<b>${c.name}</b><br>
+<b>${c.name}</b>
+<div class="class-teacher">${c.teacher}</div>
 ${c.oldPrice?`<span class="old-price">${formatPrice(c.oldPrice)}</span><br><span class="new-price">${formatPrice(c.price)}</span>`:formatPrice(c.price)}
 </div>
 </div>`).join('');
@@ -421,7 +458,6 @@ if(n===3&&selected.size===0){
 showToast('حداقل یک کلاس انتخاب کن');
 return;
 }
-const cur=document.querySelector('.card[style*="block"], .card:not([style*="none"])');
 ['1','2','3'].forEach(i=>{
 const el=document.getElementById('step'+i);
 if(i==n){
@@ -463,15 +499,13 @@ clearTimeout(window._toastTimer);
 window._toastTimer=setTimeout(()=>t.classList.remove('show'),2600);
 }
 
-function copyCard(){
-const num=document.getElementById('cardNumber').textContent;
-navigator.clipboard.writeText(num).then(()=>{
-document.getElementById('copyIcon').textContent='✅';
-document.getElementById('copyHint').textContent='کپی شد!';
-setTimeout(()=>{
-document.getElementById('copyIcon').textContent='📋';
-document.getElementById('copyHint').textContent='برای کپی روی شماره بزن';
-},1800);
+function copyText(elId,hintId){
+const val=document.getElementById(elId).textContent;
+navigator.clipboard.writeText(val).then(()=>{
+const hint=document.getElementById(hintId);
+const prevText=hint.textContent;
+hint.textContent='کپی شد!';
+setTimeout(()=>{ hint.textContent=prevText; },1800);
 }).catch(()=>showToast('کپی نشد، دستی کپی کن'));
 }
 
