@@ -350,7 +350,7 @@ input.invalid{
 <br>
 <span class="copy-hint" id="cardCopyHint">برای کپی روی شماره بزن</span>
 <br><br>
-به نام نام صاحب کارت
+به نام محمدامین رضاصفت
 </p>
 
 <div style="text-align:center;margin-top:24px">
@@ -412,7 +412,7 @@ classGrid.innerHTML=classes.map((c,i)=>`
 <img src="${c.img}">
 <div class="class-body">
 <b>${c.name}</b>
-<div class="class-teacher">${c.teacher}</div>
+${c.teacher ? `<div class="class-teacher">${c.teacher}</div>` : ''}
 ${c.oldPrice?`<span class="old-price">${formatPrice(c.oldPrice)}</span><br><span class="new-price">${formatPrice(c.price)}</span>`:formatPrice(c.price)}
 </div>
 </div>`).join('');
